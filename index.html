@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru" id="html-root">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kamolbek Ruzubayev — Centrum Air</title>
+<meta name="theme-color" content="#DCDDE1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  /* ====================================================================
+     ЧТОБЫ ПОМЕНЯТЬ ТЕКСТ (должность, компания, телефон и т.д.) —
+     листайте вниз до блока <script>, там наверху написано "НАСТРОЙКИ".
+     Меняется просто: правите текст между кавычками, ничего больше
+     трогать не нужно.
+
+     ЧТОБЫ ДОБАВИТЬ ФОТО:
+     1. Загрузите в тот же репозиторий на GitHub файл с фотографией
+        и назовите его ровно:  photo.jpg
+     2. Больше ничего делать не нужно — фото подхватится само.
+        Если файла нет, вместо фото будут показаны инициалы.
+     ==================================================================== */
+
+  :root{
+    --bg-1:#EEEFF1;
+    --bg-2:#DBDDE2;
+    --ink:#25272B;
+    --muted:#75787F;
+    --glass:rgba(255,255,255,.52);
+    --glass-strong:rgba(255,255,255,.72);
+    --line:rgba(37,39,43,.10);
+    --line-strong:rgba(37,39,43,.16);
+    --accent:#4B4E55;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    min-height:100dvh;
+    background:
+      radial-gradient(120% 90% at 15% 0%, #F4F5F6 0%, var(--bg-1) 45%, var(--bg-2) 100%);
+    color:var(--ink);
+    font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    display:flex;align-items:center;justify-content:center;
+    padding:28px 18px calc(28px + env(safe-area-inset-bottom));
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .card{
+    width:100%;max-width:400px;
+    background:var(--glass);
+    backdrop-filter:blur(22px) saturate(140%);
+    -webkit-backdrop-filter:blur(22px) saturate(140%);
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:22px;
+    box-shadow:
+      0 1px 1px rgba(37,39,43,.04),
+      0 20px 40px -20px rgba(37,39,43,.25);
+    padding:28px 26px 24px;
+    animation:rise .55s cubic-bezier(.2,.8,.2,1) both;
+  }
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.card{animation:none}}
+
+  .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .lang-toggle{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;
+    background:var(--glass-strong);border:1px solid var(--line-strong);
+    border-radius:20px;padding:6px 4px;display:flex;gap:2px;cursor:pointer;
+  }
+  .lang-toggle button{
+    font-family:inherit;font-size:11px;letter-spacing:.06em;
+    border:0;background:transparent;color:var(--muted);
+    padding:4px 10px;border-radius:16px;cursor:pointer;
+  }
+  .lang-toggle button.active{background:var(--ink);color:#fff}
+
+  .identity{display:flex;align-items:center;gap:16px;margin-bottom:22px}
+  .avatar{
+    width:64px;height:64px;border-radius:50%;flex:none;
+    background:linear-gradient(145deg,#F4F5F6,#D7D9DE);
+    border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;position:relative;
+  }
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .avatar .initials{
+    font-family:'IBM Plex Mono',monospace;font-size:19px;font-weight:500;
+    color:var(--accent);letter-spacing:.02em;
+  }
+
+  h1{font-size:22px;line-height:1.22;font-weight:700;letter-spacing:-.01em}
+  .role{margin-top:4px;font-size:14.5px;color:var(--muted);line-height:1.4}
+  .role b{color:var(--ink);font-weight:600}
+
+  .rows{border-top:1px solid var(--line)}
+  .row{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:13px 0;border-bottom:1px solid var(--line);
+    color:var(--ink);text-decoration:none;
+  }
+  .row .k{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);flex:none;
+  }
+  .row .v{font-size:14.5px;text-align:right;word-break:break-word;font-weight:500}
+  .row:active .v{color:var(--accent)}
+
+  .save{
+    display:block;width:100%;margin-top:22px;padding:16px;
+    background:var(--ink);color:#fff;border:0;border-radius:12px;
+    font-family:'Manrope',sans-serif;font-size:14.5px;font-weight:700;
+    letter-spacing:.01em;cursor:pointer;
+  }
+  .save:active{transform:translateY(1px)}
+  .save:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* сигнатурный элемент: отрывной корешок посадочного талона —
+     отсылка к профилю Revenue Manager в авиакомпании */
+  .stub{
+    margin-top:20px;padding-top:16px;
+    border-top:1px dashed var(--line-strong);
+    display:flex;align-items:center;justify-content:space-between;
+    gap:10px;
+  }
+  .barcode{display:flex;align-items:flex-end;gap:2px;height:16px}
+  .barcode i{width:2px;background:var(--line-strong);border-radius:1px}
+  .stub .code{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;
+    color:var(--muted);text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+<main class="card">
+
+  <div class="top">
+    <span class="eyebrow" data-i18n="eyebrow">Виз. карта</span>
+    <div class="lang-toggle">
+      <button id="btn-ru" class="active">RU</button>
+      <button id="btn-en">EN</button>
+    </div>
+  </div>
+
+  <div class="identity">
+    <div class="avatar" id="avatar">
+      <img id="avatar-img" src="photo.jpg" alt="" onerror="this.style.display='none'">
+      <span class="initials" id="avatar-initials">КР</span>
+    </div>
+    <div>
+      <h1 id="name">Камолбек Рузубаев</h1>
+      <p class="role"><b id="role">Revenue Manager</b> · <span id="company">Centrum Air</span></p>
+    </div>
+  </div>
+
+  <div class="rows">
+    <a class="row" href="tel:+998901263446">
+      <span class="k" data-i18n="k-phone">Тел</span><span class="v">+998 90 126-34-46</span>
+    </a>
+    <a class="row" href="https://t.me/+998901263446">
+      <span class="k">Telegram</span><span class="v">+998 90 126-34-46</span>
+    </a>
+    <a class="row" href="mailto:k.ruzubayev@gmail.com">
+      <span class="k" data-i18n="k-mail">Почта</span><span class="v">k.ruzubayev@gmail.com</span>
+    </a>
+  </div>
+
+  <button class="save" id="save" data-i18n="save">Сохранить контакт</button>
+
+  <div class="stub">
+    <span class="code" id="stub-code">CENTRUM AIR · RM</span>
+    <div class="barcode" id="barcode" aria-hidden="true"></div>
+  </div>
+</main>
+
+<script>
+  /* ======================================================================
+     НАСТРОЙКИ — меняйте текст здесь, остальной код можно не трогать.
+     ====================================================================== */
+  const CONFIG = {
+    nameRu: "Камолбек Рузубаев",
+    nameEn: "KAMOLBEK RUZUBAYEV",
+    initialsRu: "КР",
+    initialsEn: "KR",
+
+    // Должность и компания не переводятся — пишутся одинаково в обеих версиях
+    role: "Revenue Manager",
+    company: "Centrum Air",
+
+    phoneDisplay: "+998 90 126-34-46",
+    phoneTel: "+998901263446",
+    email: "k.ruzubayev@gmail.com",
+    telegramUrl: "https://t.me/+998901263446",
+  };
+
+  const TEXT = {
+    ru: {
+      eyebrow: "Виз. карта",
+      "k-phone": "Тел",
+      "k-mail": "Почта",
+      save: "Сохранить контакт",
+    },
+    en: {
+      eyebrow: "Business card",
+      "k-phone": "Phone",
+      "k-mail": "Email",
+      save: "Save contact",
+    }
+  };
+
+  let lang = 'ru';
+
+  function applyLang(newLang){
+    lang = newLang;
+    document.getElementById('html-root').lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      el.textContent = TEXT[lang][key];
+    });
+    document.getElementById('name').textContent = lang === 'ru' ? CONFIG.nameRu : CONFIG.nameEn;
+    document.getElementById('avatar-initials').textContent = lang === 'ru' ? CONFIG.initialsRu : CONFIG.initialsEn;
+    document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  }
+
+  document.getElementById('role').textContent = CONFIG.role;
+  document.getElementById('company').textContent = CONFIG.company;
+  document.getElementById('btn-ru').addEventListener('click', () => applyLang('ru'));
+  document.getElementById('btn-en').addEventListener('click', () => applyLang('en'));
+
+  // штрихкод-отсылка к посадочному талону
+  const bc = document.getElementById('barcode');
+  const pattern = [4,8,5,12,6,9,4,14,7,5,10,4,8,6];
+  pattern.forEach(h => {
+    const i = document.createElement('i');
+    i.style.height = h + 'px';
+    bc.appendChild(i);
+  });
+
+  // vCard 3.0 — сохраняется в родное приложение "Контакты" на Android и iOS
+  document.getElementById('save').addEventListener('click', () => {
+    const fullName = lang === 'ru' ? CONFIG.nameRu : CONFIG.nameEn;
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      `FN:${fullName}`,
+      `N:${fullName};;;;`,
+      `TITLE:${CONFIG.role}`,
+      `ORG:${CONFIG.company}`,
+      `TEL;TYPE=CELL:${CONFIG.phoneTel}`,
+      `EMAIL;TYPE=INTERNET:${CONFIG.email}`,
+      `X-SOCIALPROFILE;TYPE=telegram:${CONFIG.telegramUrl}`,
+      'END:VCARD'
+    ].join('\r\n');
+
+    const blob = new Blob([vcard], {type: 'text/vcard;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'kamolbek-ruzubayev.vcf';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+</script>
+</body>
+</html>
